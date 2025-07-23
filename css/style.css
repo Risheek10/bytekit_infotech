@@ -1,0 +1,1260 @@
+/* --- Root Variables for Theming --- */
+:root {
+    --bg-color: #f4f4f4; /* Default Light Mode */
+    --text-color: #333;
+    --header-bg: #333;
+    --header-text: #fff;
+    --button-bg: #007bff;
+    --button-text: #fff;
+    --card-bg: #fff;
+    --border-color: #ddd;
+    --link-color: #007bff;
+    --button-hover-bg: #0056b3;
+    --error-color: #dc3545; /* Added error color */
+    --success-color: #28a745; /* Added success color */
+    --input-bg: #fdfdfd; /* Added input background */
+    --input-border: #ccc; /* Added input border */
+    --placeholder-color: #999; /* Added placeholder color */
+}
+
+body.dark-mode {
+    --bg-color: #1a1a1a; /* Dark Mode */
+    --text-color: #f4f4f4;
+    --header-bg: #000;
+    --header-text: #eee;
+    --button-bg: #6a0dad;
+    --button-text: #fff;
+    --card-bg: #2a2a2a;
+    --border-color: #444;
+    --link-color: #92bcf7;
+    --button-hover-bg: #8a2be2;
+    --error-color: #ff6347; /* Dark mode error color */
+    --success-color: #4CAF50; /* Dark mode success color */
+    --input-bg: #202225; /* Dark mode input background */
+    --input-border: #4e5257; /* Dark mode input border */
+    --placeholder-color: #888; /* Dark mode placeholder color */
+}
+
+/* --- General Body Styles --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Added for centering the auth-wrapper on login.php */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column; /* To allow theme switcher on top or other content, and pushes footer down */
+    position: relative; /* Establish a stacking context for content above video */
+    z-index: 1; /* Ensure body content is layered above the video background */
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+header {
+    background: var(--header-bg);
+    color: var(--header-text);
+    padding-top: 20px;
+    min-height: 70px;
+    border-bottom: var(--border-color) 3px solid;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%; /* Ensure header spans full width */
+    box-sizing: border-box; /* Include padding in width */
+    z-index: 10; /* Ensure header is above other content */
+    position: relative; /* Needed for z-index to work against other stacked elements */
+}
+
+header h1 {
+    float: left;
+    margin: 0;
+    padding: 0;
+    color: var(--header-text);
+}
+
+header nav {
+    float: right;
+    margin-top: 10px;
+}
+
+header ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+header li {
+    display: inline;
+    padding: 0 15px;
+}
+
+header a {
+    color: var(--header-text);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+header a:hover {
+    color: var(--link-color);
+    font-weight: bold;
+}
+
+footer {
+    padding: 20px;
+    margin-top: auto; /* Push footer to the bottom when using flex column on body */
+    color: var(--header-text);
+    background-color: var(--header-bg);
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%; /* Ensure footer spans full width */
+    box-sizing: border-box; /* Include padding in width */
+    z-index: 10; /* Ensure footer is above other content */
+    position: relative; /* Needed for z-index to work */
+}
+
+.products-listing {
+    padding: 20px 0;
+}
+
+.products-listing h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.product-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+.product-item img {
+    max-width: 100%;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.product-item h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: var(--text-color);
+}
+
+.product-item .price {
+    font-size: 1.1em;
+    color: var(--text-color);
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.product-item .button {
+    display: inline-block;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.product-item .button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Styles for the "Explore Products" button on index.php */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: var(--card-bg);
+    margin-bottom: 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.hero h2 {
+    font-size: 2.5em;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.hero .button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.hero .button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.featured-products {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.featured-products h3 {
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+/* Simple product grid for featured products (can reuse .product-grid) */
+.featured-products .product-grid .product-item {
+    background-color: var(--card-bg);
+    border: 1px dashed var(--border-color);
+}
+
+.product-detail-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 30px 0;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-top: 20px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.product-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.product-image img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+
+.product-info {
+    flex: 2;
+    min-width: 400px;
+    padding-right: 20px;
+}
+
+.product-info h1 {
+    font-size: 2.5em;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.product-info .price-detail {
+    font-size: 1.8em;
+    color: var(--text-color);
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.product-info .description {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.product-info p {
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.product-info p strong {
+    color: var(--text-color);
+}
+
+.add-to-cart-btn {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    margin-top: 20px;
+    margin-right: 15px;
+}
+
+.add-to-cart-btn:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.back-to-products {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-top: 20px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.back-to-products:hover {
+    background-color: var(--button-hover-bg);
+}
+
+@media (max-width: 768px) {
+    .product-detail-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .product-image, .product-info {
+        min-width: unset;
+        width: 100%;
+        padding: 0 15px;
+    }
+    .product-info {
+        text-align: center;
+        padding-right: 15px;
+    }
+}
+
+/* --- Video Background Styles --- */
+.video-background {
+    position: fixed; /* Fixed position relative to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Hide any overflow of the video */
+    z-index: -1; /* Puts the video behind all other content on the page */
+}
+
+#bg-video {
+    min-width: 100%; /* Ensure video covers at least 100% width */
+    min-height: 100%; /* Ensure video covers at least 100% height */
+    width: auto; /* Allow video to expand naturally */
+    height: auto; /* Allow video to expand naturally */
+    position: absolute; /* Position relative to .video-background */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the video */
+    object-fit: cover; /* This is crucial: makes the video cover the entire container, cropping as needed */
+    background-size: cover; /* Fallback for older browsers, though object-fit is preferred */
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay for text readability */
+    z-index: 0; /* Ensures overlay is on top of video but behind your actual content */
+    /* Adjust opacity (0.0 to 1.0) and color as needed for your specific video and text */
+}
+
+/* --- Auth Wrapper (for centering the login box) --- */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Allows it to take up remaining space, pushing header/footer to ends */
+    width: 100%;
+    z-index: 2; /* Ensure the login wrapper is above the video and overlay */
+    position: relative; /* Needed for z-index to work */
+}
+
+/* --- Auth Form Container - The Expanding Box --- */
+.auth-form-container {
+    background-color: var(--card-bg);
+    border-radius: 12px; /* Slightly more rounded */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Allows content to stack */
+    justify-content: flex-start; /* Align content to start when expanded */
+    align-items: center; /* Center items horizontally within */
+    overflow: hidden; /* Crucial for hiding content outside the initial box */
+    text-align: center; /* Center text within the container */
+
+    /* Initial state dimensions */
+    width: 200px; /* Smaller initial width */
+    height: 80px; /* Smaller initial height for "Login" only */
+    padding: 0; /* No padding initially, content controls sizing */
+
+    /* Transitions for smooth expansion */
+    transition: all 0.5s ease-in-out, box-shadow 0.3s ease; /* Transition all properties for smoothness */
+    position: relative; /* Needed for absolute positioning of initial-state */
+}
+
+/* Initial state (Login text) */
+.auth-form-container .initial-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute; /* Position over the form */
+    top: 0;
+    left: 0;
+    background-color: inherit; /* Inherit background from container */
+    color: var(--text-color);
+    z-index: 2; /* Ensure it's on top initially */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Fade and move out */
+}
+
+.auth-form-container .initial-state h2 {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+/* Auth Form (username/password fields) */
+.auth-form-container .auth-form {
+    padding: 30px; /* Add padding when expanded */
+    width: 100%; /* Take full width of container when expanded */
+    box-sizing: border-box; /* Include padding in width calculation */
+    opacity: 0; /* Initially hidden */
+    transform: translateY(20px); /* Start slightly below */
+    pointer-events: none; /* Prevent interaction when hidden */
+    transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s; /* Delayed fade in */
+    z-index: 1; /* Below the initial state */
+    text-align: left; /* Align form elements to the left */
+}
+
+/* --- Hover State (when cursor is over the container) --- */
+.auth-form-container:hover {
+    width: 400px; /* Expanded width */
+    height: 380px; /* Expanded height to fit form */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* More prominent shadow on hover */
+}
+
+.auth-form-container:hover .initial-state {
+    opacity: 0; /* Fade out "Login" text */
+    transform: translateY(-20px); /* Move "Login" text up and out */
+    pointer-events: none; /* Make it unclickable when invisible */
+}
+
+.auth-form-container:hover .auth-form {
+    opacity: 1; /* Fade in form fields */
+    transform: translateY(0); /* Move form fields into place */
+    pointer-events: all; /* Allow interaction */
+    transition-delay: 0.2s; /* Delay the form transition slightly after initial state fades */
+}
+
+
+/* --- Form Elements Styling (adjusted for .auth-form context) --- */
+.auth-form .form-group {
+    margin-bottom: 20px; /* Adjusted margin */
+    text-align: left;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 8px; /* Adjusted margin */
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"], /* Added email type */
+.auth-form input[type="password"] {
+    width: calc(100% - 20px); /* Adjust for padding */
+    padding: 12px 10px; /* Adjusted padding */
+    border: 1px solid var(--input-border); /* Using input-border variable */
+    border-radius: 6px; /* Adjusted border-radius */
+    background-color: var(--input-bg); /* Using input-bg variable */
+    color: var(--text-color);
+    font-size: 1em;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
+}
+
+.auth-form input[type="text"]:focus,
+.auth-form input[type="email"]:focus,
+.auth-form input[type="password"]:focus {
+    border-color: var(--link-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Focus glow */
+    outline: none;
+}
+
+.auth-form input::placeholder {
+    color: var(--placeholder-color); /* Using placeholder-color variable */
+}
+
+.auth-form button.button { /* More specific selector for the login button */
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 6px; /* Adjusted border-radius */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Adjusted transition for transform */
+    margin-top: 10px; /* Adjusted margin-top */
+}
+
+.auth-form button.button:hover {
+    background-color: var(--button-hover-bg);
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.auth-form button.button:active {
+    transform: translateY(0); /* Return to original position on click */
+}
+
+p.form-link { /* Specific class for your form links */
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: var(--text-color);
+    text-align: center; /* Center the "Don't have an account?" text */
+}
+
+p.form-link a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+p.form-link a:hover {
+    text-decoration: underline;
+}
+
+/* Error and Success Messages - Adjusted to integrate with the expanding box */
+.error-messages {
+    color: var(--error-color);
+    background-color: color-mix(in srgb, var(--error-color) 10%, var(--card-bg)); /* Use color-mix for background */
+    border: 1px solid var(--error-color);
+    padding: 10px;
+    border-radius: 8px; /* Adjusted border-radius */
+    margin-bottom: 15px;
+    width: calc(100% - 60px); /* Adjust for padding of container */
+    box-sizing: border-box;
+    font-size: 0.9em;
+    text-align: left;
+    position: absolute; /* Position relative to .auth-form-container */
+    top: 15px; /* Adjust top position as needed */
+    left: 30px; /* Adjust left position as needed */
+    z-index: 3; /* Ensure it's above other elements */
+}
+.error-messages p {
+    margin: 0; /* Remove default paragraph margins */
+    padding: 2px 0;
+    color: inherit; /* Inherit color from parent div */
+}
+
+.success-message {
+    color: var(--success-color);
+    background-color: color-mix(in srgb, var(--success-color) 10%, var(--card-bg)); /* Use color-mix for background */
+    border: 1px solid var(--success-color);
+    padding: 10px;
+    border-radius: 8px; /* Adjusted border-radius */
+    margin-bottom: 15px;
+    width: calc(100% - 60px); /* Adjust for padding of container */
+    box-sizing: border-box;
+    font-size: 0.9em;
+    text-align: left;
+    position: absolute; /* Position relative to .auth-form-container */
+    top: 15px; /* Adjust top position as needed */
+    left: 30px; /* Adjust left position as needed */
+    z-index: 3; /* Ensure it's above other elements */
+}
+.success-message p {
+    margin: 0; /* Remove default paragraph margins */
+    padding: 2px 0;
+    color: inherit; /* Inherit color from parent div */
+}
+
+.add-to-cart-form {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.add-to-cart-form .button.add-to-cart {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 8px 15px;
+}
+
+.add-to-cart-form .button.add-to-cart:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.quantity-input {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    text-align: center;
+    margin-right: 10px;
+    background-color: var(--input-bg); /* Use input-bg variable */
+    color: var(--text-color);
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Session Message Styles (general, might be separate from .error-messages/.success-message classes in PHP) */
+.session-message {
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.session-message.success-message {
+    background-color: #d4edda; /* Keep specific color for visibility */
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.session-message.error-message {
+    background-color: #f8d7da; /* Keep specific color for visibility */
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.cart-container {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin: 40px auto;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.cart-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+.empty-cart-message {
+    text-align: center;
+    padding: 50px 0;
+    font-size: 1.2em;
+    color: var(--text-color);
+}
+
+.empty-cart-message .button {
+    margin-top: 20px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.empty-cart-message .button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+.cart-table th, .cart-table td {
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    text-align: left;
+}
+
+.cart-table th {
+    background-color: var(--card-bg);
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.cart-table td {
+    vertical-align: middle;
+}
+
+.cart-quantity-input {
+    width: 70px;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    text-align: center;
+    background-color: var(--input-bg); /* Use input-bg variable */
+    color: var(--text-color);
+    margin-right: 10px;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.remove-item-button {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.remove-item-button:hover {
+    background-color: #c82333;
+}
+
+.cart-summary {
+    text-align: right;
+    margin-top: 20px;
+    border-top: 2px solid var(--border-color);
+    padding-top: 20px;
+    color: var(--text-color);
+}
+
+.cart-summary h3 {
+    font-size: 1.8em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.cart-summary h3 span {
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.cart-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.update-cart-button,
+.checkout-button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 12px 25px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.update-cart-button:hover,
+.checkout-button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.checkout-button {
+    background-color: var(--button-bg);
+}
+
+.checkout-button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Styles for Checkout Page */
+.checkout-container {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin: 40px auto;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.checkout-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-color);
+    font-size: 2.2em;
+}
+
+.checkout-summary, .shipping-details {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.checkout-summary h3, .shipping-details h3 {
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 10px;
+}
+
+/* Reusing cart-table styles for checkout summary */
+.checkout-summary .cart-table {
+    margin-bottom: 0;
+}
+
+.checkout-summary .cart-table tfoot td {
+    border-top: 2px solid var(--border-color);
+    font-size: 1.1em;
+}
+
+.checkout-summary .cart-table .text-right {
+    text-align: right;
+}
+
+/* Specific button for checkout form */
+.checkout-place-order {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.checkout-place-order:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Styles for Order Confirmation Page */
+.confirmation-container {
+    background-color: var(--card-bg);
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin: 80px auto;
+    max-width: 600px;
+    text-align: center;
+    color: var(--text-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.confirmation-container h2 {
+    color: var(--text-color);
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.confirmation-container p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.confirmation-container strong {
+    color: var(--text-color);
+}
+
+.confirmation-actions {
+    margin-top: 30px;
+}
+
+.confirmation-actions .button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    transition: background-color 0.2s, color 0.2s;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.confirmation-actions .button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Admin Specific Styles */
+.admin-content {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.admin-content h2 {
+    font-size: 2em;
+    color: var(--text-color);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.action-bar {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.action-bar .button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.action-bar .button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+}
+
+.admin-table th, .admin-table td {
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
+    color: var(--text-color);
+}
+
+.admin-table th {
+    background-color: var(--bg-color);
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.admin-table tbody tr:nth-child(even) {
+    background-color: var(--bg-color);
+}
+
+.admin-table tbody tr:hover {
+    background-color: var(--bg-color);
+}
+
+.admin-actions .button {
+    padding: 6px 10px;
+    font-size: 0.85em;
+    margin-right: 5px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Specific colors for admin buttons (can be vars too) */
+.admin-actions .edit-button {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.admin-actions .edit-button:hover {
+    background-color: #e0a800;
+}
+
+.admin-actions .delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.admin-actions .delete-button:hover {
+    background-color: #c82333;
+}
+
+/* Reusing session messages from main site, just ensure they look good here too */
+.session-message {
+    margin-bottom: 20px;
+}
+
+/* Styles for Order Statuses in Admin Panel (Keep their specific colors) */
+.order-status-pending {
+    background-color: #ffc107;
+    color: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.order-status-processing {
+    background-color: #17a2b8;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.order-status-shipped {
+    background-color: #007bff;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.order-status-delivered {
+    background-color: #28a745;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.order-status-cancelled {
+    background-color: #dc3545;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+/* Styles for Order Details Page */
+.order-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.order-info-block {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.order-info-block h3, .order-info-block h4 {
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 10px;
+}
+
+.order-info-block p {
+    margin-bottom: 8px;
+    font-size: 1.05em;
+    color: var(--text-color);
+}
+
+.order-info-block strong {
+    color: var(--text-color);
+}
+
+/* Styles for User Types in Admin Panel (Keep their specific colors) */
+.user-type-admin {
+    background-color: #007bff;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.user-type-customer {
+    background-color: #28a745;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+/* General Table Styling */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+}
+
+.orders-table th,
+.orders-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.orders-table th {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.orders-table tbody tr:nth-child(even) {
+    background-color: var(--bg-color);
+}
+
+.orders-table tbody tr:hover {
+    background-color: var(--bg-color);
+}
+
+/* Specific styling for the small "View Details" button */
+.orders-table .button.view-details-small {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 5px 10px;
+    font-size: 0.8em;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.orders-table .button.view-details-small:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Status Badges (optional, but nice for visual clarity) - Keep their specific colors */
+.orders-table .status-pending {
+    background-color: #ffc107;
+    color: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.orders-table .status-processing {
+    background-color: #17a2b8;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.orders-table .status-shipped {
+    background-color: #28a745;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.orders-table .status-delivered {
+    background-color: #6c757d;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.orders-table .status-cancelled {
+    background-color: #dc3545;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+/* Responsive adjustments for smaller screens (optional) */
+@media (max-width: 768px) {
+    .orders-table th,
+    .orders-table td {
+        padding: 8px 10px;
+    }
+    .orders-table th:nth-child(2),
+    .orders-table td:nth-child(2) {
+        min-width: 100px;
+    }
+}
+
+/* --- Theme Toggle Bulb Styling --- */
+.theme-toggle-li {
+    display: flex;
+    align-items: center;
+    margin-left: 665px;
+}
+
+.theme-toggle-bulb-img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    filter: grayscale(100%) opacity(0.6) brightness(0.8) drop-shadow(0 0 2px #ffffff);
+    transition: filter 0.3s ease, transform 0.3s ease;
+    position: relative;
+    top: -25px; 
+}
+
+.theme-toggle-bulb-img:hover {
+    transform: scale(1.1);
+}
+
+/* Bulb ON state (in dark mode): Restore natural color and add a subtle glow */
+body.dark-mode .theme-toggle-bulb-img {
+    filter: grayscale(0%) brightness(1) drop-shadow(0 0 5px #ffffff);
+}
+
+
+/* --- Responsive adjustments for the login form --- */
+@media (max-width: 600px) {
+    .auth-form-container {
+        width: 90%; /* Adjust width for smaller screens */
+        max-width: 300px; /* Limit max width */
+        height: 80px; /* Keep initial height */
+    }
+
+    .auth-form-container:hover {
+        width: 90%;
+        max-width: 300px;
+        height: 350px; /* Adjust expanded height for smaller screens */
+    }
+
+    .auth-form {
+        padding: 20px;
+    }
+
+    .error-messages, .success-message {
+        width: calc(100% - 40px); /* Adjust padding for mobile */
+        left: 20px;
+    }
+}
