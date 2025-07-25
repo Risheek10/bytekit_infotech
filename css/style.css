@@ -35,6 +35,70 @@ body.dark-mode {
     --placeholder-color: #888; /* Dark mode placeholder color */
 }
 
+/* --- Base Theme Colors --- */
+/* Default Light Mode */
+:root {
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+    --header-bg: #333;
+    --header-text: #fff;
+    --button-bg: #007bff;
+    --button-text: #fff;
+    --card-bg: #fff;
+    --border-color: #ddd;
+    --link-color: #007bff;
+    --button-hover-bg: #0056b3;
+    --error-color: #dc3545;
+    --success-color: #28a745;
+    --input-bg: #fdfdfd;
+    --input-border: #ccc;
+    --placeholder-color: #999;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #f4f4f4;
+    --header-bg: #000;
+    --header-text: #eee;
+    --button-bg: #6a0dad;
+    --button-text: #fff;
+    --card-bg: #2a2a2a;
+    --border-color: #444;
+    --link-color: #92bcf7;
+    --button-hover-bg: #8a2be2;
+    --error-color: #ff6347;
+    --success-color: #4CAF50;
+    --input-bg: #202225;
+    --input-border: #4e5257;
+    --placeholder-color: #888;
+}
+
+/* --- Computer Mode --- */
+body.computer-mode {
+    --bg-color: #0d1117; /* Dark charcoal */
+    --text-color: #00ff00; /* Neon green for main text */
+    --header-bg: #010409; /* Even darker */
+    --header-text: #00ff00; /* Neon green header text */
+    --button-bg: #0056b3; /* Darker blue button */
+    --button-text: #00ff00; /* Neon green button text */
+    --card-bg: #161b22; /* Slightly lighter dark for cards */
+    --border-color: #008000; /* Darker green border */
+    --link-color: #00ffff; /* Cyan for links */
+    --button-hover-bg: #003366; /* Even darker blue for button hover */
+    --error-color: #ff0000; /* Bright red error */
+    --success-color: #00ff00; /* Neon green success */
+    --input-bg: #010409; /* Dark input background */
+    --input-border: #008000; /* Green input border */
+    --placeholder-color: #00cc00; /* Lighter green placeholder */
+
+    font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
+}
+
+body.computer-mode .theme-toggle-bulb-img {
+    filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 8px #00ff00); /* Neon green glow */
+}
+
 /* --- General Body Styles --- */
 body {
     font-family: Arial, sans-serif;

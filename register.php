@@ -1,12 +1,10 @@
 <?php
-// bytekit_infotech/register.php
+// This page allows new users to create an account on the ByteKit Infotech website. It handles form submission, input validation, and user creation.
 
-// Start the session at the very beginning of the script
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include necessary files
 include 'includes/header.php'; // HTML header and navigation
 include 'includes/db_connect.php'; // Database connection ($pdo object)
 include 'includes/functions.php'; // Custom functions like sanitize_input(), redirect()
@@ -16,15 +14,13 @@ $success_message = ''; // To display success message
 
 // Check if the form was submitted (HTTP POST request)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // 1. Sanitize and retrieve form data
     $username = sanitize_input($_POST['username']);
     $email = sanitize_input($_POST['email']);
-    $password = $_POST['password']; // Do NOT sanitize password yet, will be hashed
+    $password = $_POST['password']; 
     $confirm_password = $_POST['confirm_password'];
     $first_name = sanitize_input($_POST['first_name']);
     $last_name = sanitize_input($_POST['last_name']);
 
-    // 2. Validate input
     if (empty($username)) {
         $errors[] = "Username is required.";
     } elseif (!preg_match("/^[a-zA-Z0-9_]{3,20}$/", $username)) {
@@ -47,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Passwords do not match.";
     }
 
-    // 3. Check for existing username/email in database (if no validation errors yet)
     if (empty($errors)) {
         try {
             // Check if username already exists
@@ -69,7 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // 4. If no errors, proceed with registration
     if (empty($errors)) {
         // Hash the password
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -79,7 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash, first_name, last_name) VALUES (?, ?, ?, ?, ?)");
             if ($stmt->execute([$username, $email, $password_hash, $first_name, $last_name])) {
                 $success_message = "Registration successful! You can now log in.";
-                // Optionally, redirect to login page after successful registration
                 // redirect('login.php?registered=true');
             } else {
                 $errors[] = "Failed to register user. Please try again.";

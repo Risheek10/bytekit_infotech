@@ -1,24 +1,26 @@
 <?php
+// index.php
+// This is the main page (homepage) of the ByteKit Infotech website.
+// It shows a welcome message and a list of featured computer parts.
 session_start();
 
-// Include database connection
+// database connection
 include_once 'includes/db_connect.php';
 
-// Include common functions
+// common functions
 include_once 'includes/functions.php';
 
-// Fetch featured products for the homepage
+// Fetches featured products for the homepage
 $featured_products = [];
 try {
     $stmt = $pdo->query("SELECT product_id, name, price, image_url FROM products ORDER BY created_at DESC LIMIT 4");
     $featured_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     error_log("Error fetching featured products for homepage: " . $e->getMessage());
-    // Display a user-friendly message on the page, but don't stop execution
     $_SESSION['error'] = "Could not load featured products at this time.";
 }
 
-// Include the header (which contains your HTML head, body opening, and navigation)
+// the header (which contains your HTML head, body opening, and navigation)
 include 'includes/header.php';
 ?>
 
@@ -50,6 +52,6 @@ include 'includes/header.php';
 </section>
 
 <?php
-// Include the footer (which closes the HTML body and document)
+// the footer (which closes the HTML body and document)
 include 'includes/footer.php';
 ?>

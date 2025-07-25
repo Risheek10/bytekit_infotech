@@ -1,12 +1,12 @@
 <?php
-// bytekit_infotech/login.php
+// login.php
+// This page allows users to log into their ByteKit Infotech account.
+// It handles user authentication and redirects based on user type
 
-// Start the session at the very beginning of the script
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include necessary files
 include 'includes/header.php'; // HTML header and navigation
 include 'includes/db_connect.php'; // Database connection ($pdo object)
 include 'includes/functions.php'; // Custom functions like sanitize_input(), redirect()
@@ -16,7 +16,7 @@ $success_message = ''; // To display success message
 
 // Redirect if already logged in
 if (is_logged_in()) {
-    redirect('index.php'); // Or to a user dashboard page if you create one
+    redirect('index.php'); 
 }
 
 // Check if a success message from registration was passed
@@ -26,11 +26,9 @@ if (isset($_GET['registered']) && $_GET['registered'] == 'true') {
 
 // Check if the form was submitted (HTTP POST request)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // 1. Sanitize and retrieve form data
     $username_email = sanitize_input($_POST['username_email']); // Can be username or email
-    $password = $_POST['password']; // Do NOT sanitize password, will be verified
+    $password = $_POST['password'];
 
-    // 2. Validate input
     if (empty($username_email)) {
         $errors[] = "Username or Email is required.";
     }
@@ -38,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Password is required.";
     }
 
-    // 3. Attempt to authenticate user if no initial errors
     if (empty($errors)) {
         try {
             // Check if input is an email or username
@@ -52,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Check if user exists and password is correct
             if ($user && password_verify($password, $user['password_hash'])) {
-                // Login successful!
+                // Login successful
                 $success_message = "Login successful! Welcome, " . htmlspecialchars($user['first_name'] ?: $user['username']) . "!";
 
                 // Set session variables
@@ -100,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="auth-wrapper">
     <div class="auth-form-container">
         <?php
-        // Display validation/login errors (these should always be visible, not hidden by hover)
+        // Display validation/login errors 
         if (!empty($errors)) {
             echo '<div class="error-messages">';
             foreach ($errors as $error) {
@@ -109,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '</div>';
         }
 
-        // Display success message (e.g., from successful registration)
+        // Display success message 
         if ($success_message) {
             echo '<div class="success-message">';
             echo '<p>' . htmlspecialchars($success_message) . '</p>';
