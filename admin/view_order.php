@@ -1,5 +1,5 @@
 <?php
-// bytekit_infotech/admin/view_order.php
+// This page in the admin panel allows administrators to view the detailed contents and update the status of a specific customer order.
 
 include 'includes/admin_header.php'; // Handles session, access control, layout
 

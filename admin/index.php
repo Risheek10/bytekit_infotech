@@ -1,10 +1,8 @@
 <?php
-// bytekit_infotech/admin/index.php
+// This is the main dashboard for the ByteKit Infotech admin panel. It provides an overview and links to various management sections.
 
 // Include the admin header (which contains access control and starts the session)
 include 'includes/admin_header.php';
-
-// At this point, if the script is still running, the user is logged in and is an admin.
 ?>
 
 <section class="admin-dashboard">

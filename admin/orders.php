@@ -1,5 +1,5 @@
 <?php
-// bytekit_infotech/admin/orders.php
+// This page in the admin panel allows administrators to view a list of all customer orders placed on the website.
 
 include 'includes/admin_header.php'; // Handles session, access control, layout
 

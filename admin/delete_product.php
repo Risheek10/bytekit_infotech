@@ -1,12 +1,8 @@
 <?php
-// bytekit_infotech/admin/delete_product.php
+//This script handles the deletion of a specific product from the store's database by an administrator.
 
-// Include admin header for security checks (session start, admin type check)
 include 'includes/admin_header.php';
 
-// At this point, the user is confirmed to be an admin.
-
-// Ensure it's a POST request (delete operations should not be done via GET for security/idempotence reasons)
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     $_SESSION['error'] = "Invalid request method.";
     redirect('products.php');
@@ -23,7 +19,6 @@ if (!$product_id) {
 }
 
 try {
-    // Before deleting the product, we might want to get its name for the success message
     $stmt_name = $pdo->prepare("SELECT name FROM products WHERE product_id = ?");
     $stmt_name->execute([$product_id]);
     $product_name_result = $stmt_name->fetch(PDO::FETCH_ASSOC);

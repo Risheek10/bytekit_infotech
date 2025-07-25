@@ -1,5 +1,5 @@
 <?php
-// bytekit_infotech/admin/delete_user.php
+// This script handles the deletion of a specific user account from the database by an administrator.
 
 include 'includes/admin_header.php'; // Handles session, access control, layout
 
@@ -27,18 +27,10 @@ if ($user_id_to_delete == $_SESSION['user_id']) {
 }
 
 try {
-    // Optional: Get username before deleting for the success message
     $stmt_name = $pdo->prepare("SELECT username FROM users WHERE user_id = ?");
     $stmt_name->execute([$user_id_to_delete]);
     $user_name_result = $stmt_name->fetch(PDO::FETCH_ASSOC);
     $user_name = $user_name_result ? htmlspecialchars($user_name_result['username']) : 'Unknown User';
-
-    // Before deleting the user, consider data integrity for related tables (e.g., orders, cart)
-    // For simplicity in this exercise, we're directly deleting the user.
-    // In a real application, you might:
-    // 1. Soft delete (set an 'is_active' flag)
-    // 2. Reassign their orders to a 'guest' user.
-    // 3. Implement CASCADE DELETE on foreign keys (use with extreme caution).
 
     // Prepare and execute the DELETE statement
     $stmt_delete = $pdo->prepare("DELETE FROM users WHERE user_id = ?");

@@ -1,15 +1,12 @@
 <?php
-// bytekit_infotech/admin/edit_product.php
+// This page in the admin panel allows administrators to modify the details of existing computer products in the store.
 
 // Include the admin header (handles session start, access control, and layout)
 include 'includes/admin_header.php';
 
-// At this point, the user is confirmed to be an admin.
-
 $errors = [];
 $product_data = []; // To hold product data retrieved from DB
 
-// 1. Get product ID from URL
 $product_id = filter_var($_GET['id'] ?? null, FILTER_VALIDATE_INT);
 
 // Redirect if no valid product ID is provided
@@ -19,7 +16,6 @@ if (!$product_id) {
     exit;
 }
 
-// 2. Fetch product data from database to pre-fill the form
 try {
     $stmt = $pdo->prepare("SELECT * FROM products WHERE product_id = ?");
     $stmt->execute([$product_id]);
@@ -37,9 +33,7 @@ try {
     exit;
 }
 
-// 3. Handle form submission (when data is POSTed)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // 3a. Sanitize and retrieve form data
     $name = sanitize_input($_POST['name'] ?? '');
     $description = sanitize_input($_POST['description'] ?? '');
     $price = filter_var($_POST['price'] ?? 0, FILTER_VALIDATE_FLOAT);
@@ -49,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $model_number = sanitize_input($_POST['model_number'] ?? '');
     $category_id = filter_var($_POST['category_id'] ?? null, FILTER_VALIDATE_INT);
 
-    // 3b. Validate input (similar to add_product.php)
+
     if (empty($name)) {
         $errors[] = "Product Name is required.";
     }
@@ -60,16 +54,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Valid Stock Quantity is required (must be a non-negative integer).";
     }
 
-    // --- MODIFIED IMAGE URL VALIDATION (OPTION B) ---
     if (!empty($image_url)) {
         // Check if it's *not* a valid URL (http/https) AND *not* just a common image filename
         if (!filter_var($image_url, FILTER_VALIDATE_URL) && !preg_match('/\.(png|jpe?g|gif|webp)$/i', $image_url)) {
              $errors[] = "Invalid Image URL or filename format. Please use a full URL (http/https) or just the filename (e.g., image.png).";
         }
     }
-    // ----------------------------------------------------
 
-    // 3c. If no validation errors, proceed with UPDATE
     if (empty($errors)) {
         try {
             $stmt = $pdo->prepare("UPDATE products SET name = ?, description = ?, price = ?, stock_quantity = ?, image_url = ?, brand = ?, model_number = ?, category_id = ?, updated_at = CURRENT_TIMESTAMP WHERE product_id = ?");
@@ -84,8 +75,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             error_log("Admin Edit Product Update DB Error: " . $e->getMessage());
         }
     }
-    // If there were POST errors, product_data needs to be updated with POST values
-    // so the form re-displays with user's attempted changes (good UX)
     $product_data = array_merge($product_data, $_POST);
 }
 ?>

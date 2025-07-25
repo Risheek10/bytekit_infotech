@@ -1,5 +1,5 @@
 <?php
-// bytekit_infotech/admin/categories.php
+// This page in the admin panel allows administrators to manage product categories (add, edit, delete categories).
 
 include 'includes/admin_header.php'; // Handles session, access control, layout
 
@@ -46,8 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// --- Handle Delete Action (via GET, for simplicity, but POST is generally safer) ---
-// Note: A more robust solution would use a POST form for deletion as well.
+// --- Handle Delete Action ---
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     $category_id_to_delete = filter_var($_GET['id'] ?? null, FILTER_VALIDATE_INT);
 

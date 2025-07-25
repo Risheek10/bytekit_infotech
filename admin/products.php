@@ -1,14 +1,7 @@
 <?php
-// bytekit_infotech/admin/products.php
+// This page in the admin panel allows administrators to view a list of all products in the store for management purposes.
 
-// Include the admin header (handles session start, access control, and layout)
 include 'includes/admin_header.php';
-
-// At this point, the user is confirmed to be an admin.
-
-// Include database connection
-// No need to include db_connect.php directly here, as admin_header.php already includes it via functions.php
-// (functions.php includes db_connect.php, and admin_header.php includes functions.php)
 
 // Fetch all products from the database
 $products = [];
@@ -44,7 +37,6 @@ try {
         echo '<div class="session-message success-message"><p>' . htmlspecialchars($_SESSION['message']) . '</p></div>';
         unset($_SESSION['message']); // Clear the message after displaying it
     }
-    // You might also have error messages from previous actions
     if (isset($_SESSION['error'])) {
         echo '<div class="session-message error-message"><p>' . htmlspecialchars($_SESSION['error']) . '</p></div>';
         unset($_SESSION['error']);

@@ -1,10 +1,7 @@
 <?php
-// bytekit_infotech/admin/add_product.php
+// This page in the admin panel provides a form for administrators to add new computer products to the store's catalogue.
 
-// Include the admin header (handles session start, access control, and layout)
 include 'includes/admin_header.php';
-
-// At this point, the user is confirmed to be an admin.
 
 $errors = [];
 $success_message = '';
@@ -22,7 +19,6 @@ try {
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // 1. Sanitize and retrieve form data
     $name = sanitize_input($_POST['name'] ?? '');
     $description = sanitize_input($_POST['description'] ?? '');
     $price = filter_var($_POST['price'] ?? 0, FILTER_VALIDATE_FLOAT);
@@ -30,9 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $image_url = sanitize_input($_POST['image_url'] ?? '');
     $brand = sanitize_input($_POST['brand'] ?? '');
     $model_number = sanitize_input($_POST['model_number'] ?? '');
-    $category_id = filter_var($_POST['category_id'] ?? null, FILTER_VALIDATE_INT); // Will connect to categories later
+    $category_id = filter_var($_POST['category_id'] ?? null, FILTER_VALIDATE_INT);
 
-    // 2. Validate input
     if (empty($name)) {
         $errors[] = "Product Name is required.";
     }
@@ -42,14 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stock_quantity === false || $stock_quantity < 0) {
         $errors[] = "Valid Stock Quantity is required (must be a non-negative integer).";
     }
-    // Basic URL validation for image (can be more robust)
+    // Basic URL validation for image
     if (!empty($image_url) && !filter_var($image_url, FILTER_VALIDATE_URL)) {
         $errors[] = "Invalid Image URL format.";
     }
 
-    // You might add more validation for brand, model, description length, etc.
-
-    // 3. If no errors, insert into database
     if (empty($errors)) {
         try {
             $stmt = $pdo->prepare("INSERT INTO products (name, description, price, stock_quantity, image_url, brand, model_number, category_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");

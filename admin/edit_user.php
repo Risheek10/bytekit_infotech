@@ -1,12 +1,11 @@
 <?php
-// bytekit_infotech/admin/edit_user.php
+// This page in the admin panel allows administrators to modify the details of existing user accounts, including their user type.
 
 include 'includes/admin_header.php'; // Handles session, access control, layout
 
 $errors = [];
 $user_data = []; // To hold user data retrieved from DB
 
-// 1. Get user ID from URL
 $user_id = filter_var($_GET['id'] ?? null, FILTER_VALIDATE_INT);
 
 // Redirect if no valid user ID is provided
@@ -17,14 +16,12 @@ if (!$user_id) {
 }
 
 // Prevent an admin from demoting themselves or deleting themselves
-// This is a basic check. More robust logic might be needed for multi-admin setups.
 if ($user_id == $_SESSION['user_id'] && $_SESSION['user_type'] === 'admin') {
     $_SESSION['error'] = "You cannot edit your own user type or critical account details this way. Please contact another admin or use a dedicated profile page.";
     redirect('users.php');
     exit;
 }
 
-// 2. Fetch user data from database to pre-fill the form
 try {
     $stmt = $pdo->prepare("SELECT user_id, username, email, first_name, last_name, phone_number, user_type FROM users WHERE user_id = ?");
     $stmt->execute([$user_id]);
@@ -42,16 +39,13 @@ try {
     exit;
 }
 
-// 3. Handle form submission (when data is POSTed)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // 3a. Sanitize and retrieve form data
     $email = sanitize_input($_POST['email'] ?? '');
     $first_name = sanitize_input($_POST['first_name'] ?? '');
     $last_name = sanitize_input($_POST['last_name'] ?? '');
     $phone_number = sanitize_input($_POST['phone_number'] ?? '');
     $user_type = sanitize_input($_POST['user_type'] ?? 'customer'); // Default to 'customer' if not set
 
-    // 3b. Validate input
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "A valid Email is required.";
     }
@@ -75,7 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         error_log("Admin Edit User Email Check DB Error: " . $e->getMessage());
     }
 
-    // 3c. If no validation errors, proceed with UPDATE
     if (empty($errors)) {
         try {
             $stmt = $pdo->prepare("UPDATE users SET email = ?, first_name = ?, last_name = ?, phone_number = ?, user_type = ?, updated_at = CURRENT_TIMESTAMP WHERE user_id = ?");
@@ -90,8 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             error_log("Admin Edit User Update DB Error: " . $e->getMessage());
         }
     }
-    // If there were POST errors, user_data needs to be updated with POST values
-    // so the form re-displays with user's attempted changes (good UX)
     $user_data = array_merge($user_data, $_POST);
 }
 ?>
