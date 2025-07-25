@@ -1,5 +1,5 @@
 <?php
-// bytekit_infotech/includes/header.php
+// This file provides the consistent header section for all public-facing pages of the website. It includes the start of the HTML document, meta tags, CSS links, and the main navigation menu.
 $cart_item_count = 0;
 if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
     foreach ($_SESSION['cart'] as $item) {
@@ -22,7 +22,7 @@ if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
             // Display session messages (e.g., "Product added to cart!")
             if (isset($_SESSION['message'])) {
                 echo '<div class="session-message success-message"><p>' . htmlspecialchars($_SESSION['message']) . '</p></div>';
-                unset($_SESSION['message']); // Clear the message after displaying it
+                unset($_SESSION['message']);
             }
             ?>
             <h1><a href="/bytekit_infotech/index.php" style="color:#fff; text-decoration:none;">ByteKit Infotech</a></h1>

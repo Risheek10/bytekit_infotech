@@ -1,13 +1,14 @@
 <?php
+// This file contains general-purpose PHP functions used across different parts of the ByteKit Infotech website, such as input sanitization and redirection.
 /**
  * Validates and sanitizes string input.
  * @param string $data The input string.
  * @return string The sanitized string.
  */
 function sanitize_input($data) {
-    $data = trim($data); // Remove whitespace from both ends
-    $data = stripslashes($data); // Remove backslashes
-    $data = htmlspecialchars($data); // Convert special characters to HTML entities
+    $data = trim($data); 
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
     return $data;
 }
 
@@ -16,8 +17,6 @@ function sanitize_input($data) {
  * @return bool True if logged in, false otherwise.
  */
 function is_logged_in() {
-    // session_start() should be called at the very top of the main script, not here.
-    // This function assumes session is already active.
     return isset($_SESSION['user_id']);
 }
 
@@ -29,7 +28,4 @@ function redirect($url) {
     header("Location: " . $url);
     exit(); // Always exit after a header redirect
 }
-
-// You can add more general-purpose functions here as your project grows.
-// For example: is_admin(), get_product_by_id(), etc.
 ?>
