@@ -1322,3 +1322,81 @@ body.dark-mode .theme-toggle-bulb-img {
         left: 20px;
     }
 }
+
+/* Styles for Help Pages (getting_started.php, faq.php, etc.) */
+.help-content {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin: 40px auto;
+    text-align: left; /* Align text to left within content section */
+    line-height: 1.6;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.help-content h2 {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 30px;
+    font-size: 2.2em;
+}
+
+.help-content h3 {
+    color: var(--link-color);
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 5px;
+}
+
+.help-content p {
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.help-content ul {
+    list-style: disc;
+    margin-left: 25px;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.help-content li {
+    margin-bottom: 8px;
+}
+
+.help-content a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.help-content a:hover {
+    text-decoration: underline;
+}
+
+/* Specific styles for FAQ items */
+.faq-list .faq-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-color); /* Lighter background than card-bg */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.faq-list .faq-item h3 {
+    color: var(--text-color);
+    font-size: 1.1em;
+    margin: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.faq-list .faq-item p {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 0.95em;
+    color: var(--text-color);
+}
