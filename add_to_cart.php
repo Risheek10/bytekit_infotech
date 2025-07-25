@@ -1,12 +1,10 @@
 <?php
-// bytekit_infotech/add_to_cart.php
+// This script processes requests to add products to the user's shopping cart, managing quantities and session data.
 
-// Start the session (crucial for shopping cart)
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include necessary files
 include_once 'includes/db_connect.php'; // For getting product details
 include_once 'includes/functions.php'; // For redirect()
 

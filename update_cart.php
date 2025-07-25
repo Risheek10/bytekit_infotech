@@ -1,12 +1,10 @@
 <?php
-// bytekit_infotech/update_cart.php
+// This script processes requests to add products to the user's shopping cart, managing quantities and session data.
 
-// Start the session (crucial for shopping cart operations)
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include necessary files
 include_once 'includes/db_connect.php'; // For potential stock checks
 include_once 'includes/functions.php'; // For redirect()
 
@@ -41,9 +39,6 @@ elseif (isset($_POST['update_cart']) && isset($_POST['quantity']) && is_array($_
 
         // Ensure product exists in cart and new quantity is valid
         if (isset($cart[$product_id]) && $new_quantity >= 0) {
-            // Optional: Re-fetch stock_quantity from DB to prevent over-ordering
-            // This is important for a real store, for now we rely on add_to_cart for initial check.
-            // For a robust system, you'd re-check stock here before updating the cart.
             try {
                 $stmt = $pdo->prepare("SELECT stock_quantity FROM products WHERE product_id = ?");
                 $stmt->execute([$product_id]);
@@ -51,7 +46,7 @@ elseif (isset($_POST['update_cart']) && isset($_POST['quantity']) && is_array($_
                 $max_stock = $product_db_info['stock_quantity'] ?? 0;
 
                 if ($new_quantity > $max_stock) {
-                    $new_quantity = $max_stock; // Cap quantity at available stock
+                    $new_quantity = $max_stock; 
                     $messages_for_update[] = "Only " . $max_stock . " of " . htmlspecialchars($cart[$product_id]['name']) . " available. Quantity adjusted.";
                 }
 

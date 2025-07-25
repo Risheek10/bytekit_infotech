@@ -1,10 +1,8 @@
 <?php
-// bytekit_infotech/products.php
+// This page displays a list of all computer products available for sale on the ByteKit Infotech website.
 
-// Include the header (which contains your HTML head, body opening, and navigation)
+// the header (which contains HTML head, body opening, and navigation)
 include 'includes/header.php';
-
-// Include the database connection file
 include 'includes/db_connect.php'; // This provides the $pdo object
 ?>
 
@@ -19,12 +17,11 @@ include 'includes/db_connect.php'; // This provides the $pdo object
 
             // Check if any products were found
             if ($products) {
-                // Loop through each product and display it
                 foreach ($products as $product) {
         ?>
                     <div class="product-item">
                         <?php
-                        // Display product image if available, otherwise a placeholder
+                        // Display product image
                         $image_src = !empty($product['image_url']) ? 'images/products/' . htmlspecialchars($product['image_url']) : 'https://via.placeholder.com/150?text=No+Image';
                         ?>
                         <img src="<?php echo htmlspecialchars($image_src); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
@@ -43,7 +40,6 @@ include 'includes/db_connect.php'; // This provides the $pdo object
             }
         } catch (PDOException $e) {
             echo "<p style='color: red;'>Error fetching products: " . htmlspecialchars($e->getMessage()) . "</p>";
-            // In a production environment, you'd log this error and show a generic message
             error_log("Error fetching products: " . $e->getMessage());
         }
         ?>
@@ -51,6 +47,6 @@ include 'includes/db_connect.php'; // This provides the $pdo object
 </section>
 
 <?php
-// Include the footer (which closes the HTML body and document)
+// the footer
 include 'includes/footer.php';
 ?>

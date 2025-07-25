@@ -1,7 +1,6 @@
 <?php
-// bytekit_infotech/logout.php
+// This script handles logging out a user by clearing their session and redirecting them to the homepage or login page.
 
-// Start the session to access session variables
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -12,8 +11,7 @@ $_SESSION = array();
 // Destroy the session
 session_destroy();
 
-// Redirect to the homepage or login page
-// Assuming your homepage is index.php
+// Redirect to the homepage
 header("Location: index.php");
-exit; // Always exit after a header redirect
+exit;
 ?>

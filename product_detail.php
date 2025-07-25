@@ -1,21 +1,21 @@
 <?php
-// bytekit_infotech/product_detail.php
+// This page shows detailed information for a single computer product based on its ID.
 
-// Include the header (which contains your HTML head, body opening, and navigation)
+// the header
 include 'includes/header.php';
 
-// Include the database connection file
+// the database connection file
 include 'includes/db_connect.php'; // This provides the $pdo object
 
-$product = null; // Initialize product variable to null
+$product = null;
 
-// Check if a product ID is provided in the URL (e.g., product_detail.php?id=1)
+// Checks if a product ID is provided in the URL
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $product_id = $_GET['id'];
 
     try {
-        // Prepare a SQL query to fetch a single product by its ID
-        // Using a prepared statement for security to prevent SQL injection
+        // SQL query to fetch a single product by its ID
+        // statement for security to prevent SQL injection
         $stmt = $pdo->prepare("SELECT * FROM products WHERE product_id = :id");
         $stmt->bindParam(':id', $product_id, PDO::PARAM_INT); // Bind the ID as an integer
         $stmt->execute(); // Execute the prepared statement

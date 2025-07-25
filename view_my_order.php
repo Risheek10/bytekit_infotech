@@ -1,7 +1,8 @@
 <?php
+// This page displays the detailed contents of a specific order for a logged-in user, including items and shipping information.
 session_start();
-require_once 'includes/db_connect.php'; // Your database connection file
-require_once 'includes/header.php'; // Include your header for consistent layout
+require_once 'includes/db_connect.php';
+require_once 'includes/header.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {

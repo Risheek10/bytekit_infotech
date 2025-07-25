@@ -1,5 +1,5 @@
 <?php
-// bytekit_infotech/order_confirmation.php
+// This page confirms to the user that their order has been successfully placed, providing an order ID.
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();

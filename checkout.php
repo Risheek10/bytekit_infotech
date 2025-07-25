@@ -1,5 +1,5 @@
 <?php
-// bytekit_infotech/checkout.php
+// This page guides the user through the final steps of placing an order. It displays the order summary, collects shipping details, and processes the order.
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -31,7 +31,7 @@ foreach ($cart as $product_id => $item) {
     $cart_total += $item['price'] * $item['quantity'];
 }
 
-// Fetch user's existing address details for pre-filling the form (optional but good UX)
+// Fetch user's existing address details for pre-filling the form
 $user_id = $_SESSION['user_id'];
 $user_details = [];
 try {
@@ -46,12 +46,10 @@ try {
 
 // Handle form submission (Placing the Order)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // 1. Sanitize and validate input
     $shipping_address = sanitize_input($_POST['shipping_address']);
     $city = sanitize_input($_POST['city']);
     $province = sanitize_input($_POST['province']);
     $postal_code = sanitize_input($_POST['postal_code']);
-    // You might add phone_number, full_name from form if not using session user_details
 
     if (empty($shipping_address)) $errors[] = "Shipping address is required.";
     if (empty($city)) $errors[] = "City is required.";
@@ -63,10 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Invalid postal code format (e.g., A1A 1A1).";
     }
 
-    // 2. Process order if no validation errors
     if (empty($errors)) {
         try {
-            $pdo->beginTransaction(); // Start a transaction for atomicity
+            $pdo->beginTransaction();
 
             // Insert into 'orders' table
             $stmt = $pdo->prepare("INSERT INTO orders (user_id, total_amount, shipping_address, city, province, postal_code, status) VALUES (?, ?, ?, ?, ?, ?, 'pending')");

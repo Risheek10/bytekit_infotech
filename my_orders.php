@@ -1,9 +1,8 @@
 <?php
-// C:\xampp\htdocs\bytekit_infotech\my_orders.php
+// This page allows logged-in users to view a list of all their past orders placed on the ByteKit Infotech website.
 
-session_start(); // Start the session at the very beginning
+session_start();
 
-// Include database connection and functions
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 
@@ -25,10 +24,8 @@ try {
 } catch (PDOException $e) {
     error_log("Error fetching user orders: " . $e->getMessage());
     $_SESSION['error'] = "Could not retrieve your orders at this time. Please try again later.";
-    // You might want to redirect or simply display the error on this page
 }
 
-// Include the header (which includes your HTML head, body opening, and navigation)
 include 'includes/header.php';
 ?>
 

@@ -1,12 +1,10 @@
 <?php
-// bytekit_infotech/cart.php
+// This page displays the current contents of the user's shopping cart, showing selected items, quantities, and the total price.
 
-// Start the session at the very beginning of the script
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include necessary files
 include_once 'includes/functions.php'; // For sanitize_input(), etc.
 include_once 'includes/db_connect.php'; // For potential future needs (e.g., re-fetching fresh product data)
 include 'includes/header.php'; // HTML header and navigation
