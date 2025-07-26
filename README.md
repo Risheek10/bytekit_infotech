@@ -86,11 +86,4 @@ Once you have the code, place the `bytekit_infotech` folder in your web server's
 * **Admin Guide:** Instructions for managing the application in `docs/admin_guide.md`
 * **Help Wiki:** User-facing help pages in the `help/` directory.
 
-## Contributing
-
-[Optional: Instructions for others to contribute to your project, e.g., bug reports, feature requests, pull requests.]
-
-
-[Optional: Information about the project's license, e.g., MIT, GPL.]
-
 ---
