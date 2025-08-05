@@ -1,6 +1,6 @@
 # Bytekit Infotech Web Application
 
-A web application for managing categories, products, users, and orders. This project demonstrates a full-stack PHP application with a MySQL database.
+A web application for managing categories, products, users, and orders of Computer parts and components. This project demonstrates a full-stack PHP application with a MySQL database.
 Files are accessible from the master branch.
 
 ## Features
